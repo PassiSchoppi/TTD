@@ -1,13 +1,12 @@
-var radius = 200;
-var KreisX = 250;
-var KreisY = 250;
+var radius = 300;
+var KreisX = 1366/2;
+var KreisY = 768/2;
 
 var anzalP = 100;
 var multiplikator = 1;
 
 function setup() {
-  frameRate(30);
-	createCanvas(500, 500);
+	createCanvas(windowWidth, windowHeight);
 }
 
 function getkoordinaten(kreisAnteil){
@@ -22,10 +21,21 @@ function draw() {
   noFill();
   stroke(255);
   ellipse(KreisX, KreisY, radius*2, radius*2);
-  
+  multiplikator=0;
+
+  var d = new Date();
+  var hou = 23-d.getHours();
+  var min = 59-d.getMinutes();
+  var sec = 59-d.getSeconds();
+  multiplikator = (sec)+(min*60)+(hou*3600);
+  fill(255);
+  textSize(20);
+  text("Stunden:   "+str(hou), 20, 20);
+  text("Minuten:   "+str(min), 20, 60);
+  text("Sekunden:  "+str(sec), 20, 100);
+  text("Gesamt:    "+str(multiplikator), 20, 140);
   //Berechnung
   for(punktID=0; punktID<anzalP; punktID++){
-    multiplikator+=0.0002;
     //erster Punkt
     var ersterP = getkoordinaten((1/anzalP)*punktID);
     noStroke();
