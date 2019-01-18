@@ -1,14 +1,13 @@
 var radius = 300;
 var KreisX = 1366/2;
-var KreisY = 768/2;
+var KreisY = 650/2;
 
 var anzalP = 500;
-var multiplikator = 1;
+var multiplikator = 0;
 
 function setup() {
-  frameRate(1);
+  frameRate(1)
   createCanvas(windowWidth, windowHeight);
-  multiplikator = 0;
 }
 
 function getkoordinaten(kreisAnteil){
@@ -22,24 +21,18 @@ function draw() {
   background(100);
   strokeWeight(1);
 
+  multiplikator++;
+
   //Kreis
   noFill();
-  stroke(random(100, 255), random(100, 255), random(100, 255));
+  stroke(255);
   ellipse(KreisX, KreisY, radius*2, radius*2);
-  multiplikator=0;
 
-  var d = new Date();
-  var hou = 23-d.getHours();
-  var min = 59-d.getMinutes();
-  var sec = 59-d.getSeconds();
-  multiplikator = (sec)+(min*60)+(hou*3600);
-
-  fill(255);
+  //Text
   textSize(30);
-  text("Stunden:   "+str(hou), 20, 30);
-  text("Minuten:   "+str(min), 20, 70);
-  text("Sekunden:  "+str(sec), 20, 110);
-  text("Gesamt:    "+str(multiplikator), 20, 150);
+  fill(255);
+  text(multiplikator, 100, 100, 100, 100);
+
   //Berechnung
   for(punktID=0; punktID<anzalP; punktID++){
     //erster Punkt
@@ -50,4 +43,8 @@ function draw() {
     //Linine
     line(ersterP[0], ersterP[1], zweiterP[0], zweiterP[1]);
   }
+}
+
+function mousePressed() {
+  multiplikator=0;
 }
